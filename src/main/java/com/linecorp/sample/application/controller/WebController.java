@@ -58,7 +58,7 @@ public class WebController {
         String mechineCode = liffParamArr[1];
         String redirectUrl = "https://life.aquiver.app/active/n/"+ mechineCode +"?p=N";
         System.out.println("转发地址：" + redirectUrl);
-        return redirectUrl;
+        return "redirect:" + redirectUrl;
     }
 
     /**
