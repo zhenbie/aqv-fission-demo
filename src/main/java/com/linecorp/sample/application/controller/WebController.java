@@ -52,6 +52,8 @@ public class WebController {
      */
     @RequestMapping("/")
     public String login(HttpServletRequest request) {
+        String requestUrl = this.getDomain(request);
+        System.out.println("requestUrl: " + requestUrl);
         String liffState = request.getParameter("liff.state");
         System.out.println("liff.state: " + liffState);
         String[] liffParamArr = liffState.split("=");
@@ -163,4 +165,12 @@ public class WebController {
         return "user/session_error";
     }
 
+    protected String getDomain(HttpServletRequest request) {
+        String domain = request.getScheme()
+                + "://" + request.getServerName()
+                + ":" + request.getServerPort()
+                + request.getContextPath()
+                + "/";
+        return domain;
+    }
 }
