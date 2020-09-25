@@ -56,9 +56,8 @@ public class WebController {
         System.out.println("requestUrl: " + requestUrl);
         String liffState = request.getParameter("liff.state");
         System.out.println("liff.state: " + liffState);
-        String[] liffParamArr = liffState.split("=");
-        String mechineCode = liffParamArr[1];
-        String redirectUrl = "https://life.aquiver.app/active/n/"+ mechineCode +"?p=N";
+        String machineCode = liffState.substring(1);
+        String redirectUrl = "https://life.aquiver.app/active/n/"+ machineCode +"?p=N";
         System.out.println("转发地址：" + redirectUrl);
         return "redirect:" + redirectUrl;
     }
