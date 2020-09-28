@@ -114,7 +114,7 @@ public class LineAPIService {
                 + "&bot_prompt=aggressive"
                 + "&scope=" + scope
                 + "&nonce=" + nonce;
-
+        System.out.println("redirectUrl:" + redirectUrl);
         return redirectUrl;
     }
 
