@@ -62,7 +62,7 @@ public class WebController {
         String machineCode = liffState.substring(1);
         String redirectUrl = "https://life.aquiver.app/active/n/"+ machineCode +"?p=N";
         System.out.println("转发地址：" + redirectUrl);*/
-        return "redirect: /gotoauthpage";
+        return "redirect:/gotoauthpage";
     }
 
     /**
