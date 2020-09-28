@@ -20,11 +20,13 @@ import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 
 import com.linecorp.sample.infra.utils.CommonUtils;
+import groovy.util.logging.Slf4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -35,6 +37,7 @@ import com.linecorp.sample.infra.line.api.v2.response.IdToken;
 /**
  * <p>user web application pages</p>
  */
+@Slf4j
 @Controller
 public class WebController {
 
@@ -54,12 +57,12 @@ public class WebController {
     public String login(HttpServletRequest request) {
         String requestUrl = this.getDomain(request);
         System.out.println("requestUrl: " + requestUrl);
-        String liffState = request.getParameter("liff.state");
+        /*String liffState = request.getParameter("liff.state");
         System.out.println("liff.state: " + liffState);
         String machineCode = liffState.substring(1);
         String redirectUrl = "https://life.aquiver.app/active/n/"+ machineCode +"?p=N";
-        System.out.println("转发地址：" + redirectUrl);
-        return "redirect:" + redirectUrl;
+        System.out.println("转发地址：" + redirectUrl);*/
+        return "redirect: /gotoauthpage";
     }
 
     /**
@@ -73,6 +76,16 @@ public class WebController {
         httpSession.setAttribute(NONCE, nonce);
         final String url = lineAPIService.getLineWebLoginUrl(state, nonce, Arrays.asList("openid", "profile"));
         return "redirect:" + url;
+    }
+
+    @GetMapping("/callback")
+    public String callback(@RequestParam(value = "code", required = false) String code,
+                           @RequestParam(value = "state", required = false) String state,
+                           @RequestParam(value = "friendship_status_changed", required = false) boolean friendship_status_changed) {
+        logger.debug("parameter code : " + code);
+        logger.debug("parameter state : " + state);
+        logger.debug("parameter friendship_status_changed : " + friendship_status_changed);
+        return "redirect:/success";
     }
 
     /**

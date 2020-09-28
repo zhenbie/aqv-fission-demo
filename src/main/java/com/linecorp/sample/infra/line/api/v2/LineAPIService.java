@@ -112,6 +112,7 @@ public class LineAPIService {
                 + "&client_id=" + channelId
                 + "&redirect_uri=" + encodedCallbackUrl
                 + "&state=" + state
+                + "&bot_prompt=aggressive"
                 + "&scope=" + scope
                 + "&nonce=" + nonce;
     }
