@@ -107,14 +107,15 @@ public class LineAPIService {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
-
-        return "https://access.line.me/oauth2/v2.1/authorize?response_type=code"
+        String redirectUrl = "https://access.line.me/oauth2/v2.1/authorize?response_type=code"
                 + "&client_id=" + channelId
                 + "&redirect_uri=" + encodedCallbackUrl
                 + "&state=" + state
                 + "&bot_prompt=aggressive"
                 + "&scope=" + scope
                 + "&nonce=" + nonce;
+
+        return redirectUrl;
     }
 
     public boolean verifyIdToken(String id_token, String nonce) {
